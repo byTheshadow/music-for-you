@@ -1,257 +1,158 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎵 Music For You</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/themes.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🎵 黑胶播放器</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet" />
 </head>
-<body data-theme="vinyl">
+<body data-theme="dark-vinyl">
 
-    <!-- 背景装饰 -->
-    <div class="bg-decoration"></div>
+  <!-- 主题切换 -->
+  <div class="theme-switcher">
+    <span class="theme-label">主题</span>
+    <div class="theme-dots">
+      <button class="dot active" data-theme="dark-vinyl" title="深夜黑胶"></button>
+      <button class="dot" data-theme="warm-amber" title="琥珀暖光"></button>
+      <button class="dot" data-theme="mint-retro" title="薄荷复古"></button>
+      <button class="dot" data-theme="rose-vinyl" title="玫瑰唱片"></button>
+      <button class="dot" data-theme="ocean-blue" title="深海蓝调"></button>
+    </div>
+  </div>
 
-    <!-- 主容器 -->
-    <div class="app-container">
+  <div class="app-container">
 
-        <!-- 顶部栏 -->
-        <header class="top-bar">
-            <div class="logo">
-                <i class="fas fa-record-vinyl logo-icon"></i>
-                <span class="logo-text">Music For You</span>
-            </div>
-            <div class="top-actions">
-                <button class="btn-icon" id="themeToggleBtn" title="切换主题">
-                    <i class="fas fa-palette"></i>
-                </button>
-                <button class="btn-icon" id="settingsBtn" title="设置">
-                    <i class="fas fa-cog"></i>
-                </button>
-            </div>
-        </header>
+    <!-- 标题 -->
+    <header class="app-header">
+      <div class="header-decoration">◈ ─────────── ◈</div>
+      <h1 class="app-title">VINYL PLAYER</h1>
+      <p class="app-subtitle">黑胶音乐播放器</p>
+      <div class="header-decoration">◈ ─────────── ◈</div>
+    </header>
 
-        <!-- 搜索区域 -->
-        <div class="search-section">
-            <div class="search-box">
-                <i class="fas fa-search search-icon"></i>
-                <input type="text" id="searchInput" placeholder="搜索你想听的歌..." autocomplete="off">
-                <button class="search-btn" id="searchBtn">搜索</button>
-            </div>
-            <div class="search-filters">
-                <label class="filter-tag">
-                    <input type="checkbox" id="srcNetease" checked>
-                    <span class="tag netease">网易云</span>
-                </label>
-                <label class="filter-tag">
-                    <input type="checkbox" id="srcItunes" checked>
-                    <span class="tag itunes">iTunes</span>
-                </label></div>
+    <!-- 黑胶唱片区域 -->
+    <div class="vinyl-section">
+      <div class="turntable">
+        <!-- 唱臂 -->
+        <div class="tonearm" id="tonearm">
+          <div class="tonearm-base"></div>
+          <div class="tonearm-arm"></div>
+          <div class="tonearm-head"></div>
         </div>
-
-        <!-- 主内容区-->
-        <div class="main-content">
-
-            <!-- 左侧：搜索结果 / 播放列表 -->
-            <div class="content-left">
-                <div class="tab-bar">
-                    <button class="tab-btn active" data-tab="search">
-                        <i class="fas fa-search"></i> 搜索结果
-                    </button>
-                    <button class="tab-btn" data-tab="playlist">
-                        <i class="fas fa-heart"></i> 我的收藏
-                    </button><button class="tab-btn" data-tab="history">
-                        <i class="fas fa-clock"></i> 最近播放
-                    </button>
-                </div>
-
-                <div class="song-list-container">
-                    <!-- 搜索结果 -->
-                    <div class="song-list" id="searchResults"><div class="empty-state">
-                            <i class="fas fa-music"></i>
-                            <p>搜索你喜欢的音乐吧 ❤️</p>
-                        </div>
-                    </div><!-- 收藏列表 -->
-                    <div class="song-list hidden" id="playlistResults">
-                        <div class="empty-state">
-                            <i class="fas fa-heart"></i>
-                            <p>还没有收藏的歌曲</p>
-                        </div>
-                    </div>
-                    <!-- 历史记录 -->
-                    <div class="song-list hidden" id="historyResults">
-                        <div class="empty-state">
-                            <i class="fas fa-clock"></i>
-                            <p>还没有播放记录</p>
-                        </div>
-                    </div>
-                </div>
+        <!-- 黑胶盘 -->
+        <div class="vinyl-disc" id="vinylDisc">
+          <div class="vinyl-grooves"></div>
+          <div class="vinyl-label" id="vinylLabel">
+            <div class="label-inner">
+              <div class="label-brand">♪</div>
+              <div class="label-title" id="labelTitle">等待播放</div>
+              <div class="label-artist" id="labelArtist">选择一首歌曲</div>
+              <div class="label-hole"></div>
             </div>
-
-            <!-- 右侧：播放器 -->
-            <div class="content-right">
-                <div class="player-card">
-                    <!--唱片/封面 -->
-                    <div class="album-art-wrapper">
-                        <div class="vinyl-disc" id="vinylDisc">
-                            <div class="vinyl-grooves"></div>
-                            <div class="vinyl-label">
-                                <img src="" alt="" id="albumArt" class="album-img">
-                                <div class="default-art" id="defaultArt">
-                                    <i class="fas fa-music"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 歌曲信息 -->
-                    <div class="song-info">
-                        <h2 class="song-title" id="songTitle">等待播放...</h2>
-                        <p class="song-artist" id="songArtist">选一首歌开始吧</p>
-                        <span class="song-source" id="songSource"></span>
-                    </div>
-
-                    <!-- 进度条 -->
-                    <div class="progress-section">
-                        <span class="time" id="currentTime">0:00</span>
-                        <div class="progress-bar" id="progressBar">
-                            <div class="progress-fill" id="progressFill"></div>
-                            <div class="progress-thumb" id="progressThumb"></div>
-                        </div>
-                        <span class="time" id="totalTime">0:00</span>
-                    </div>
-
-                    <!-- 控制按钮 -->
-                    <div class="controls">
-                        <button class="ctrl-btn" id="shuffleBtn" title="随机播放">
-                            <i class="fas fa-random"></i>
-                        </button>
-                        <button class="ctrl-btn" id="prevBtn" title="上一首">
-                            <i class="fas fa-step-backward"></i>
-                        </button>
-                        <button class="ctrl-btn play-btn" id="playBtn" title="播放">
-                            <i class="fas fa-play" id="playIcon"></i>
-                        </button>
-                        <button class="ctrl-btn" id="nextBtn" title="下一首">
-                            <i class="fas fa-step-forward"></i>
-                        </button>
-                        <button class="ctrl-btn" id="repeatBtn" title="循环模式">
-                            <i class="fas fa-redo"></i>
-                        </button>
-                    </div>
-
-                    <!-- 音量 -->
-                    <div class="volume-section">
-                        <button class="btn-icon" id="volumeBtn">
-                            <i class="fas fa-volume-up" id="volumeIcon"></i>
-                        </button>
-                        <div class="volume-bar" id="volumeBar">
-                            <div class="volume-fill" id="volumeFill"></div>
-                        </div>
-                    </div>
-
-                    <!-- 收藏按钮 -->
-                    <button class="favorite-btn" id="favoriteBtn" title="收藏">
-                        <i class="far fa-heart" id="favoriteIcon"></i>
-                    </button>
-                </div>
-
-                <!-- 歌词区域 -->
-                <div class="lyrics-card">
-                    <h3><i class="fas fa-align-left"></i> 歌词</h3>
-                    <div class="lyrics-content" id="lyricsContent">
-                        <p class="lyrics-placeholder">暂无歌词</p>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
+        <!-- 底座反光 -->
+        <div class="turntable-reflection"></div>
+      </div>
     </div>
 
-    <!-- 主题设置面板 -->
-    <div class="theme-panel hidden" id="themePanel">
-        <div class="theme-panel-content">
-            <div class="theme-panel-header">
-                <h3>🎨 主题设置</h3>
-                <button class="btn-icon" id="closeThemePanel">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-
-            <div class="theme-presets">
-                <h4>预设主题</h4>
-                <div class="preset-list">
-                    <button class="preset-btn active" data-theme="vinyl">
-                        <div class="preset-preview vinyl-preview"></div>
-                        <span>黑胶唱片</span>
-                    </button>
-                    <button class="preset-btn" data-theme="tape">
-                        <div class="preset-preview tape-preview"></div>
-                        <span>复古磁带</span>
-                    </button>
-                    <button class="preset-btn" data-theme="neon">
-                        <div class="preset-preview neon-preview"></div>
-                        <span>霓虹灯</span>
-                    </button>
-                    <button class="preset-btn" data-theme="sakura">
-                        <div class="preset-preview sakura-preview"></div>
-                        <span>樱花粉</span>
-                    </button>
-                    <button class="preset-btn" data-theme="ocean">
-                        <div class="preset-preview ocean-preview"></div>
-                        <span>深海蓝</span>
-                    </button>
-                    <button class="preset-btn" data-theme="forest">
-                        <div class="preset-preview forest-preview"></div>
-                        <span>森林绿</span>
-                    </button>
-                </div>
-            </div>
-
-            <div class="theme-custom">
-                <h4>自定义颜色</h4>
-                <div class="color-pickers">
-                    <div class="color-item">
-                        <label>背景色</label>
-                        <input type="color" id="customBg" value="#1a1a2e">
-                    </div>
-                    <div class="color-item">
-                        <label>主色调</label>
-                        <input type="color" id="customPrimary" value="#e94560">
-                    </div>
-                    <div class="color-item">
-                        <label>文字色</label>
-                        <input type="color" id="customText" value="#ffffff">
-                    </div>
-                    <div class="color-item">
-                        <label>卡片色</label>
-                        <input type="color" id="customCard" value="#16213e">
-                    </div>
-                </div>
-                <button class="apply-btn" id="applyCustomTheme">应用自定义主题</button>
-            </div>
-        </div>
+    <!-- 歌曲信息 -->
+    <div class="song-info">
+      <div class="song-title" id="songTitle">未在播放</div>
+      <div class="song-artist" id="songArtist">—</div>
+      <div class="song-source-badge" id="sourceBadge"></div>
     </div>
 
-    <!-- 加载提示 -->
-    <div class="loading-overlay hidden" id="loadingOverlay">
-        <div class="loading-spinner">
-            <i class="fas fa-record-vinyl fa-spin"></i>
-            <p>搜索中...</p>
+    <!-- 进度条 -->
+    <div class="progress-section">
+      <span class="time-display" id="currentTime">0:00</span>
+      <div class="progress-bar-wrap" id="progressWrap">
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progressFill"></div>
+          <div class="progress-thumb" id="progressThumb"></div>
         </div>
+      </div>
+      <span class="time-display" id="totalTime">0:00</span>
     </div>
 
-    <!-- 音频元素 -->
-    <audio id="audioPlayer" preload="auto"></audio>
+    <!-- 控制按钮 -->
+    <div class="controls">
+      <button class="ctrl-btn" id="btnShuffle" title="随机">
+        <svg viewBox="0 0 24 24"><path d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z"/></svg>
+      </button>
+      <button class="ctrl-btn" id="btnPrev" title="上一首">
+        <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+      </button>
+      <button class="ctrl-btn play-btn" id="btnPlay" title="播放/暂停">
+        <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        <svg class="icon-pause" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+      </button>
+      <button class="ctrl-btn" id="btnNext" title="下一首">
+        <svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+      </button>
+      <button class="ctrl-btn" id="btnRepeat" title="循环">
+        <svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg>
+      </button>
+    </div>
 
-    <!-- JS文件 -->
-    <script src="js/storage.js"></script>
-    <script src="js/api/itunes.js"></script>
-    <script src="js/api/netease.js"></script>
-    <script src="js/search.js"></script>
-    <script src="js/player.js"></script>
-    <script src="js/themes.js"></script>
-    <script src="js/app.js"></script>
+    <!-- 音量 -->
+    <div class="volume-section">
+      <svg class="volume-icon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+      <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="80" />
+    </div>
 
+    <!-- 搜索区域 -->
+    <div class="search-section">
+      <div class="search-box">
+        <input
+          type="text"
+          class="search-input"
+          id="searchInput"
+          placeholder="搜索歌曲、歌手..."
+          autocomplete="off"
+        />
+        <button class="search-btn" id="searchBtn">
+          <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+        </button>
+      </div>
+
+      <!-- API 源选择 -->
+      <div class="api-filters">
+        <span class="filter-label">搜索源：</span>
+        <label class="api-toggle">
+          <input type="checkbox" value="apiopen" checked /> 小明API
+        </label>
+        <label class="api-toggle">
+          <input type="checkbox" value="itunes" checked /> iTunes
+        </label>
+        <label class="api-toggle">
+          <input type="checkbox" value="jamendo" checked /> Jamendo
+        </label>
+      </div>
+    </div>
+
+    <!-- 搜索结果 / 播放列表 -->
+    <div class="playlist-section">
+      <div class="playlist-header">
+        <span id="playlistTitle">播放列表</span>
+        <span class="result-count" id="resultCount"></span>
+      </div>
+      <div class="loading-indicator" id="loadingIndicator" style="display:none">
+        <div class="vinyl-spinner"></div>
+        <span>正在搜索多个音源...</span>
+      </div>
+      <div class="playlist" id="playlist"></div>
+    </div>
+
+  </div>
+
+  <!-- 隐藏的 audio 元素 -->
+  <audio id="audioPlayer" crossorigin="anonymous"></audio>
+
+  <script src="themes.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
+
