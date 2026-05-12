@@ -101,17 +101,12 @@ const Player = {
         this.updateSongInfo(song);
         this.updatePlayingState(true);
 
-        // 如果是网易云的歌，需要先获取播放链接
-        if (song.source === 'netease' && !song.url) {
-            const url = await NeteaseAPI.getSongUrl(song.neteaseId);
-            if (url) {
-                song.url = url;
-            } else {
-                alert('该歌曲暂时无法播放，可能需要VIP或版权限制');
-                this.updatePlayingState(false);
-                return;
-            }
-        }
+        // 网易云直接有url，但如果没有就提示
+if (song.source === 'netease' && !song.url) {
+    alert('该歌曲暂时无法播放');
+    this.updatePlayingState(false);
+    return;
+}
 
         if (!song.url) {
             alert('无法获取播放链接');
@@ -128,16 +123,14 @@ const Player = {
         // 添加到历史记录
         Storage.addHistory(song);
 
-        // 获取歌词（网易云）
-        this.lyrics = null;
-        if (song.source === 'netease' && song.neteaseId) {
-            NeteaseAPI.getLyrics(song.neteaseId).then(lyrics => {
-                this.lyrics = lyrics;
-                this.renderLyrics();
-            });
-        } else {
-            this.renderLyrics();
-        }
+        // 获取歌词
+        // 直接用搜索结果里带的lrc
+if (song.source === 'netease' && song.lrc) {
+    this.lyrics = NeteaseAPI.parseLyrics(song.lrc);
+}
+this.renderLyrics();
+
+        
 
         // 更新收藏状态
         this.updateFavoriteUI();
