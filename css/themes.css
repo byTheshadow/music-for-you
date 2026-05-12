@@ -1,0 +1,227 @@
+/* ========== 主题面板 ========== */
+.theme-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 320px;
+    height: 100%;
+    background: var(--card-color);
+    border-left: 1px solid var(--border-color);
+    z-index: 999;
+    overflow-y: auto;
+    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.3);animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(100%); }
+    to { transform: translateX(0); }
+}
+
+.theme-panel-content {
+    padding: 25px;
+}
+
+.theme-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.theme-panel-header h3 {
+    font-size: 18px;
+}
+
+.preset-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.preset-btn {
+    background: var(--bg-secondary, var(--card-color));
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    padding: 12px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s;
+    color: var(--text-color);
+}
+
+.preset-btn:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+.preset-btn.active {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 15px rgba(233, 69, 96, 0.3);
+}
+
+.preset-preview {
+    width: 100%;
+    height: 40px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+}
+
+.vinyl-preview { background: linear-gradient(135deg, #1a1a2e, #e94560); }
+.tape-preview { background: linear-gradient(135deg, #2d1b00, #f39c12); }
+.neon-preview { background: linear-gradient(135deg, #0a0a0a, #00f5ff); }
+.sakura-preview { background: linear-gradient(135deg, #2d1f2f, #ff9a9e); }
+.ocean-preview { background: linear-gradient(135deg, #0c2340, #1cb5e0); }
+.forest-preview { background: linear-gradient(135deg, #1a2e1a, #2ecc71); }
+
+.preset-btn span {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.theme-custom {
+    margin-top: 20px;
+}
+
+.theme-custom h4,
+.theme-presets h4 {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+}
+
+.color-pickers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+.color-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.color-item label {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.color-item input[type="color"] {
+    width: 100%;
+    height: 36px;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    background: none;
+    padding: 2px;
+}
+
+.apply-btn {
+    width: 100%;
+    padding: 12px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.apply-btn:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+}
+
+/* ========== 黑胶唱片主题 ========== */
+[data-theme="vinyl"] {
+    --bg-color: #1a1a2e;
+    --bg-secondary: #16213e;
+    --card-color: #16213e;
+    --card-hover: #1a2744;
+    --primary-color: #e94560;
+    --primary-hover: #ff6b81;
+    --text-color: #eee;
+    --text-secondary: #aaa;
+    --border-color: #2a2a4a;
+    --vinyl-color: #111;
+    --groove-color: #222;
+}
+
+/* ========== 复古磁带主题 ========== */
+[data-theme="tape"] {
+    --bg-color: #1a1008;
+    --bg-secondary: #2d1b00;
+    --card-color: #2d1b00;
+    --card-hover: #3d2800;
+    --primary-color: #f39c12;
+    --primary-hover: #f1c40f;
+    --text-color: #f5e6d3;
+    --text-secondary: #b8956a;
+    --border-color: #4a3520;
+    --vinyl-color: #1a1008;
+    --groove-color: #2d1b00;
+}
+
+/* ========== 霓虹灯主题 ========== */
+[data-theme="neon"] {
+    --bg-color: #0a0a0a;
+    --bg-secondary: #111;
+    --card-color: #141414;
+    --card-hover: #1a1a1a;
+    --primary-color: #00f5ff;
+    --primary-hover: #00d4ff;
+    --text-color: #eee;
+    --text-secondary: #888;
+    --border-color: #222;
+    --vinyl-color: #0a0a0a;
+    --groove-color: #1a1a1a;
+}
+
+/* ========== 樱花粉主题 ========== */
+[data-theme="sakura"] {
+    --bg-color: #1a1520;
+    --bg-secondary: #2d1f2f;
+    --card-color: #2d1f2f;
+    --card-hover: #3d2a3f;
+    --primary-color: #ff9a9e;
+    --primary-hover: #fecfef;
+    --text-color: #f5e6f0;
+    --text-secondary: #b89aaa;
+    --border-color: #4a354a;
+    --vinyl-color: #1a1520;
+    --groove-color: #2d1f2f;
+}
+
+/* ========== 深海蓝主题 ========== */
+[data-theme="ocean"] {
+    --bg-color: #0a1628;
+    --bg-secondary: #0c2340;
+    --card-color: #0c2340;
+    --card-hover: #103050;
+    --primary-color: #1cb5e0;
+    --primary-hover: #48d1e8;
+    --text-color: #e0f0ff;
+    --text-secondary: #7ab0d4;
+    --border-color: #1a3a5c;
+    --vinyl-color: #0a1628;
+    --groove-color: #0c2340;
+}
+
+/* ========== 森林绿主题 ========== */
+[data-theme="forest"] {
+    --bg-color: #0d1a0d;
+    --bg-secondary: #1a2e1a;
+    --card-color: #1a2e1a;
+    --card-hover: #243d24;
+    --primary-color: #2ecc71;
+    --primary-hover: #55efc4;
+    --text-color: #e0f5e0;
+    --text-secondary: #7ab87a;
+    --border-color: #2a4a2a;
+    --vinyl-color: #0d1a0d;
+    --groove-color: #1a2e1a;
+}
