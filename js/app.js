@@ -170,7 +170,7 @@ const App = {
     }
 };
 
-// 启动应用
+// 启动应用 now
 document.addEventListener('DOMContentLoaded', () => {
     App.init();
 });
