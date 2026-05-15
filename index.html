@@ -3,147 +3,141 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>🎵 黑胶播放器</title>
+  <title>🎵 JUST A PLAYER</title>
+  
+  <!-- 引入样式 -->
   <link rel="stylesheet" href="css/style.css" />
+  
+  <!-- 引入字体 -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Special+Elite&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Noto+Serif+SC:wght@300;400;700&display=swap" rel="stylesheet" />
 </head>
 <body data-theme="dark-vinyl">
 
   <!-- 主题切换 -->
   <div class="theme-switcher">
-    <span class="theme-label">主题</span>
+    <span class="theme-label">Theme</span>
     <div class="theme-dots">
-      <button class="dot active" data-theme="dark-vinyl" title="深夜黑胶"></button>
-      <button class="dot" data-theme="warm-amber" title="琥珀暖光"></button>
-      <button class="dot" data-theme="mint-retro" title="薄荷复古"></button>
-      <button class="dot" data-theme="rose-vinyl" title="玫瑰唱片"></button>
-      <button class="dot" data-theme="ocean-blue" title="深海蓝调"></button>
+      <button class="dot active" data-theme="dark-vinyl" title="猩红暗影"></button>
+      <button class="dot" data-theme="warm-amber" title="黄金年代"></button>
+      <button class="dot" data-theme="mint-retro" title="翡翠梦境"></button>
+      <button class="dot" data-theme="rose-vinyl" title="夜幕玫瑰"></button>
+      <button class="dot" data-theme="ocean-blue" title="深渊海蓝"></button>
     </div>
   </div>
 
   <div class="app-container">
 
-    <!-- 标题 -->
-    <header class="app-header">
-      <div class="header-decoration">◈ ─────────── ◈</div>
-      <h1 class="app-title">VINYL PLAYER</h1>
-      <p class="app-subtitle">黑胶音乐播放器</p>
-      <div class="header-decoration">◈ ─────────── ◈</div>
-    </header>
+    <!-- ================= 左侧：播放器核心 UI ================= -->
+    <div class="player-left">
+      <header class="app-header">
+        <h1 class="app-title">Gothic <span>Vinyl</span></h1>
+        <p class="app-subtitle">Modern Minimal Player</p>
+      </header>
 
-    <!-- 黑胶唱片区域 -->
-    <div class="vinyl-section">
-      <div class="turntable">
-        <!-- 唱臂 -->
-        <div class="tonearm" id="tonearm">
-          <div class="tonearm-base"></div>
-          <div class="tonearm-arm"></div>
-          <div class="tonearm-head"></div>
-        </div>
-        <!-- 黑胶盘 -->
-        <div class="vinyl-disc" id="vinylDisc">
-          <div class="vinyl-grooves"></div>
-          <div class="vinyl-label" id="vinylLabel">
-            <div class="label-inner">
-              <div class="label-brand">♪</div>
+      <!-- 黑胶唱片区域 -->
+      <div class="vinyl-section">
+        <div class="turntable" id="turntableContainer">
+          <!-- 机械唱臂 -->
+          <div class="tonearm" id="tonearm">
+            <div class="tonearm-base"></div>
+            <div class="tonearm-arm"></div>
+            <div class="tonearm-head"></div>
+          </div>
+          <!-- 悬浮黑胶盘 -->
+          <div class="vinyl-disc" id="vinylDisc">
+            <div class="vinyl-grooves"></div>
+            <div class="vinyl-label" id="vinylLabel">
+              <div class="label-brand">V</div>
               <div class="label-title" id="labelTitle">等待播放</div>
               <div class="label-artist" id="labelArtist">选择一首歌曲</div>
               <div class="label-hole"></div>
             </div>
           </div>
         </div>
-        <!-- 底座反光 -->
-        <div class="turntable-reflection"></div>
       </div>
-    </div>
 
-    <!-- 歌曲信息 -->
-    <div class="song-info">
-      <div class="song-title" id="songTitle">未在播放</div>
-      <div class="song-artist" id="songArtist">—</div>
-      <div class="song-source-badge" id="sourceBadge"></div>
-    </div>
+      <!-- 歌曲信息 -->
+      <div class="song-info">
+        <div class="song-title" id="songTitle">未在播放</div>
+        <div class="song-artist" id="songArtist">—</div>
+        <div class="song-source-badge" id="sourceBadge"></div>
+      </div>
 
-    <!-- 进度条 -->
-    <div class="progress-section">
-      <span class="time-display" id="currentTime">0:00</span>
-      <div class="progress-bar-wrap" id="progressWrap">
-        <div class="progress-bar-bg">
-          <div class="progress-bar-fill" id="progressFill"></div>
-          <div class="progress-thumb" id="progressThumb"></div>
+      <!-- 进度条 -->
+      <div class="progress-section">
+        <span class="time-display" id="currentTime">00:00</span>
+        <div class="progress-bar-wrap" id="progressWrap">
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="progressFill">
+              <div class="progress-thumb" id="progressThumb"></div>
+            </div>
+          </div>
         </div>
+        <span class="time-display" id="totalTime">00:00</span>
       </div>
-      <span class="time-display" id="totalTime">0:00</span>
-    </div>
 
-    <!-- 控制按钮 -->
-    <div class="controls">
-      <button class="ctrl-btn" id="btnShuffle" title="随机">
-        <svg viewBox="0 0 24 24"><path d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z"/></svg>
-      </button>
-      <button class="ctrl-btn" id="btnPrev" title="上一首">
-        <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
-      </button>
-      <button class="ctrl-btn play-btn" id="btnPlay" title="播放/暂停">
-        <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-        <svg class="icon-pause" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-      </button>
-      <button class="ctrl-btn" id="btnNext" title="下一首">
-        <svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
-      </button>
-      <button class="ctrl-btn" id="btnRepeat" title="循环">
-        <svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg>
-      </button>
-    </div>
-
-    <!-- 音量 -->
-    <div class="volume-section">
-      <svg class="volume-icon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
-      <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="80" />
-    </div>
-
-    <!-- 搜索区域 -->
-    <div class="search-section">
-      <div class="search-box">
-        <input
-          type="text"
-          class="search-input"
-          id="searchInput"
-          placeholder="搜索歌曲、歌手..."
-          autocomplete="off"
-        />
-        <button class="search-btn" id="searchBtn">
-          <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+      <!-- 控制按钮 -->
+      <div class="controls">
+        <button class="ctrl-btn" id="btnShuffle" title="随机">
+          <svg viewBox="0 0 24 24"><path d="M10.59 9.17L5.41 4 4 5.41l5.17 5.17 1.42-1.41zM14.5 4l2.04 2.04L4 18.59 5.41 20 17.96 7.46 20 9.5V4h-5.5zm.33 9.41l-1.41 1.41 3.13 3.13L14.5 20H20v-5.5l-2.04 2.04-3.13-3.13z"/></svg>
+        </button>
+        <button class="ctrl-btn" id="btnPrev" title="上一首">
+          <svg viewBox="0 0 24 24"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+        </button>
+        <button class="ctrl-btn play-btn" id="btnPlay" title="播放/暂停">
+          <svg class="icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          <svg class="icon-pause" viewBox="0 0 24 24" style="display:none"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+        </button>
+        <button class="ctrl-btn" id="btnNext" title="下一首">
+          <svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+        </button>
+        <button class="ctrl-btn" id="btnRepeat" title="循环">
+          <svg viewBox="0 0 24 24"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z"/></svg>
         </button>
       </div>
 
-      <!-- API 源选择 -->
-      <div class="api-filters">
-        <span class="filter-label">搜索源：</span>
-        <label class="api-toggle">
-          <input type="checkbox" value="apiopen" checked /> 小明API
-        </label>
-        <label class="api-toggle">
-          <input type="checkbox" value="itunes" checked /> iTunes
-        </label>
-        <label class="api-toggle">
-          <input type="checkbox" value="jamendo" checked /> Jamendo
-        </label>
+      <!-- 音量 -->
+      <div class="volume-section">
+        <svg class="volume-icon" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+        <input type="range" class="volume-slider" id="volumeSlider" min="0" max="100" value="80" />
       </div>
     </div>
 
-    <!-- 搜索结果 / 播放列表 -->
-    <div class="playlist-section">
-      <div class="playlist-header">
-        <span id="playlistTitle">播放列表</span>
-        <span class="result-count" id="resultCount"></span>
+    <!-- ================= 右侧：搜索与列表区 ================= -->
+    <div class="player-right">
+      <!-- 搜索区域 -->
+      <div class="search-section">
+        <div class="search-box">
+          <input type="text" class="search-input" id="searchInput" placeholder="搜索歌曲、歌手..." autocomplete="off" />
+          <button class="search-btn" id="searchBtn">
+            <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+          </button>
+        </div>
+        <div class="api-filters">
+          <span class="filter-label">搜索源：</span>
+          <label class="api-toggle"><input type="checkbox" value="apiopen" checked /> 小明API</label>
+          <label class="api-toggle"><input type="checkbox" value="itunes" checked /> iTunes</label>
+          <label class="api-toggle"><input type="checkbox" value="jamendo" checked /> Jamendo</label>
+        </div>
       </div>
-      <div class="loading-indicator" id="loadingIndicator" style="display:none">
-        <div class="vinyl-spinner"></div>
-        <span>正在搜索多个音源...</span>
+
+      <!-- 播放列表 -->
+      <div class="playlist-section">
+        <div class="playlist-header">
+          <span id="playlistTitle">播放列表</span>
+          <span class="result-count" id="resultCount"></span>
+        </div>
+        
+        <!-- 加载动画 -->
+        <div class="loading-indicator" id="loadingIndicator" style="display:none">
+          <div class="vinyl-spinner"></div>
+          <span>正在搜索音源，穿越暗影中...</span>
+        </div>
+
+        <!-- 列表容器，由 app.js 动态渲染 -->
+        <div class="playlist" id="playlist"></div>
       </div>
-      <div class="playlist" id="playlist"></div>
     </div>
 
   </div>
@@ -151,8 +145,9 @@
   <!-- 隐藏的 audio 元素 -->
   <audio id="audioPlayer" crossorigin="anonymous"></audio>
 
+  <!-- 引入JS逻辑 -->
   <script src="js/themes.js"></script>
-<script src="js/app.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
 
